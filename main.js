@@ -61,7 +61,7 @@ async function get (url, sessionStorage, headers) {
       
       if (error) return reject(error)
 
-      return resolve(body)
+      return resolve(body);
 
     });
 
@@ -122,6 +122,7 @@ function getData(){
         if (!headers && response.url().startsWith(req_consumptions_start)){
 
           try{
+
             var data = await response.json();
             
             // Getting/Copying request headers in order to use them in other request
@@ -135,13 +136,13 @@ function getData(){
             sessionStorage = await getSessionStorage(page);
 
             // At this point browser can be closed
-            browser.close()
+            browser.close();
             
             documentNumber = user;
-            startDate="01/05/2000"
-            endDate="31/12/2100"
+            startDate="01/05/2000";
+            endDate="31/12/2100";
 
-            url_supply_points = "https://api.ufd.es/ufd/v1.0/supplypoints?filter=documentNumber::"+documentNumber+"&offset=1&limit=15"
+            url_supply_points = "https://api.ufd.es/ufd/v1.0/supplypoints?filter=documentNumber::"+documentNumber+"&offset=1&limit=15";
             
             var supplypoints = JSON.parse(await get(url_supply_points, sessionStorage, headers.request_headers));
             
@@ -201,4 +202,4 @@ function main(){
 }
 
 
-main()
+main();

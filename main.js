@@ -61,7 +61,7 @@ async function get (url, sessionStorage, headers) {
       
       if (error) return reject(error)
 
-      return resolve(body)
+      return resolve(body);
 
     });
 
@@ -122,6 +122,7 @@ function getData(){
         if (!headers && response.url().startsWith(req_consumptions_start)){
 
           try{
+
             var data = await response.json();
             
             // Getting/Copying request headers in order to use them in other request
@@ -135,13 +136,13 @@ function getData(){
             sessionStorage = await getSessionStorage(page);
 
             // At this point browser can be closed
-            browser.close()
+            browser.close();
             
             documentNumber = user;
-            startDate="01/05/2000"
-            endDate="31/12/2100"
+            startDate="01/05/2000";
+            endDate="31/12/2100";
 
-            url_supply_points = "https://api.ufd.es/ufd/v1.0/supplypoints?filter=documentNumber::"+documentNumber+"&offset=1&limit=15"
+            url_supply_points = "https://api.ufd.es/ufd/v1.0/supplypoints?filter=documentNumber::"+documentNumber+"&offset=1&limit=15";
             
             var supplypoints = JSON.parse(await get(url_supply_points, sessionStorage, headers.request_headers));
             
@@ -151,14 +152,14 @@ function getData(){
             url_actual_current_meter = "https://api.ufd.es/ufd/v1.0/meterReadings?filter=documentNumber::"+documentNumber+"%7Ccups::"+cups+"%7CmeasurementSystem::O%7CmeterId::"+meterid+"%7CreadingTypeIds::441,421,411" ;    
             url_historic_data = "https://api.ufd.es/ufd/v1.0/consumptions?filter=nif::"+documentNumber+"%7Ccups::"+cups+"%7CstartDate::"+startDate+"%7CendDate::"+endDate+"%7Cgranularity::F%7Cunit::K%7Cgenerator::0%7CisDelegate::N%7CmeasurementSystem::O";
 
-            actual_current_meter = await get(url_actual_current_meter, sessionStorage, headers.request_headers);
-            historic_data = await get(url_historic_data, sessionStorage, headers.request_headers);
+            meter_readings = await get(url_actual_current_meter, sessionStorage, headers.request_headers);
+            consumptions = await get(url_historic_data, sessionStorage, headers.request_headers);
 
             console.log("===============");
             console.log("Results: ");
 
-            save("output/meter_readings.json", historic_data );
-            save("output/consumptions.json", actual_current_meter );
+            save("output/meter_readings.json", meter_readings );
+            save("output/consumptions.json", consumptions );
 
           }catch(e){
             console.log("ERROR");
@@ -201,4 +202,4 @@ function main(){
 }
 
 
-main()
+main();

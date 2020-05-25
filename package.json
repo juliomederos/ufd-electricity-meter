@@ -1,0 +1,16 @@
+{
+  "name": "ufd-electricity-meter",
+  "version": "1.0.0",
+  "description": "---------------------------------------------------------- Helpful resources:",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "puppeteer": "3.0.0",
+    "request": "2.88.2",
+    "yargs": "15.3.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
